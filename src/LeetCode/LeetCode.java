@@ -1,3 +1,5 @@
+package LeetCode;
+
 import java.util.*;
 
 class LeetCode {
@@ -91,8 +93,6 @@ class LeetCode {
         for (int i = 0; i < tStack.size(); i++) {
             newT += tStack.pop();
         }
-        System.out.println(newS);
-        System.out.println(newT);
         return newS.equals(newT);
     }
 
@@ -204,7 +204,7 @@ class LeetCode {
         LeetCode lc = new LeetCode();
 
         int[] nums = {2, 2};
-        //System.out.println(lc.backspaceCompare("ab##", "c#d#"));
+        System.out.println(lc.backspaceCompare("ab##", "c#d#"));
 
     }
 }
