@@ -3,9 +3,6 @@ import java.util.*;
 class LeetCode {
 
     // https://leetcode.com/problems/multiply-strings/
-    // Given two non-negative integers num1 and num2 represented as strings, return the product of num1 and num2, also represented as a string.
-    // Input: num1 = "2", num2 = "3"
-    // Output: "6"
     public String multiply(String num1, String num2) {
         Integer value1 = Integer.parseInt(num1);
         Integer value2 = Integer.parseInt(num2);
@@ -174,10 +171,13 @@ class LeetCode {
         return weight;
     }
 
-    int sum = 0;
-    ArrayList<TreeNode> nodez = new ArrayList<>();
+    
 
     public int rangeSumBST(TreeNode root, int L, int R) {
+        
+        //put sum and nodez as globals if u wanna run this, david
+        int sum = 0;
+        ArrayList<TreeNode> nodez = new ArrayList<>();
         inOrderAddTraversal(root);
 
         for (int i = 0; i < nodez.size(); i++) {
@@ -191,10 +191,11 @@ class LeetCode {
     }
 
     public void inOrderAddTraversal(TreeNode root) {
+        //helper funtion for rangeSumBST, adds all nodes to a list
         if (root == null) {
             return;
         }
-        nodez.add(root);
+        //nodez.add(root);
         inOrderAddTraversal(root.left);
         inOrderAddTraversal(root.right);
     }
@@ -207,7 +208,6 @@ class LeetCode {
 
     }
 }
-
 
 class TreeNode {
     int val;
