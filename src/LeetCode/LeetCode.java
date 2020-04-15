@@ -113,7 +113,6 @@ class LeetCode {
         return count;
     }
 
-
     public int lastStoneWeight(int[] stones) {
         int weight = 0;
 
@@ -171,10 +170,8 @@ class LeetCode {
         return weight;
     }
 
-    
-
     public int rangeSumBST(TreeNode root, int L, int R) {
-        
+
         //put sum and nodez as globals if u wanna run this, david
         int sum = 0;
         ArrayList<TreeNode> nodez = new ArrayList<>();
@@ -200,99 +197,183 @@ class LeetCode {
         inOrderAddTraversal(root.right);
     }
 
+    public String stringShift(String s, int[][] shift) {
+        String answer = s;
+        boolean left;
+        boolean right;
+        Queue queue = new LinkedList();
+        queue = addColumnsToList(shift);
+
+        while(!queue.isEmpty()) {
+
+            int leftOrRight = (int) queue.poll();
+            int numOfShifts = (int) queue.poll();
+
+            System.out.println("left or right: " + leftOrRight);
+            System.out.println("Num of rotations: " + numOfShifts);
+            System.out.println("answer: " + answer);
+
+            if(leftOrRight == 0){
+                left = true;
+                right = false;
+                System.out.println("Shifting left...");
+                answer = leftrotate(answer, numOfShifts );
+            }
+
+            if(leftOrRight == 1){
+                left = false;
+                right = true;
+                System.out.println("Shifting right...");
+                answer = rightrotate(answer, numOfShifts);
+            }
+        }
+
+        return answer;
+    }
+
+    // function that rotates s towards left by d
+    String leftrotate(String str, int d) {
+        String ans = str.substring(d) + str.substring(0, d);
+        return ans;
+    }
+
+    // function that rotates s towards right by d
+    String rightrotate(String str, int d) {
+        return leftrotate(str, str.length() - d);
+    }
+
+    public int[] productExceptSelf(int[] nums) {
+        int[] ans = new int[nums.length];
+        int totalProduct = 1;
+
+        for (int i = 0; i < nums.length ; i++) {
+            totalProduct *= nums[i];
+        }
+
+        System.out.println("Total product: " + totalProduct);
+
+        if (totalProduct == 0) {
+            return nums;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            ans[i] = totalProduct / nums[i];
+        }
+        return ans;
+    }
+
     public static void main(String[] args) {
         LeetCode lc = new LeetCode();
 
-        int[] nums = {2, 2};
-        System.out.println(lc.backspaceCompare("ab##", "c#d#"));
+        // stringShift testing
+        String s = "abc";
+        int[] shift = {1 , 0};
+        int[] ans = lc.productExceptSelf(shift);
 
-    }
-}
-
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-
-    TreeNode(int x) {
-        val = x;
-    }
-}
-
-class MinStack {
-    Node top;
-    Node min;
-
-    /**
-     * initialize your data structure here.
-     */
-    public MinStack() {
-        top = null;
-        min = null;
-        ;
-    }
-
-    public void push(int x) {
-        Node prevTop = top;
-        Node newNode = new Node();
-        newNode.value = x;
-        newNode.next = prevTop;
-        top = newNode;
-
-        //first time called
-        boolean flag = true;
-        if (flag) {
-            min = newNode;
-            flag = false;
-        } else if (newNode.value < min.value) {
-            min = newNode;
+        for (int i = 0; i < ans.length; i++) {
+            System.out.print(ans[i] + " ");
         }
 
+
+
     }
 
-    public void pop() {
-        if (isEmpty()) {
-            System.out.println("empty stack");
-        }
-        Node popped = top;
-        top = top.next;
-        System.out.println("popped: " + popped.value);
-        //return popped.value;
-    }
+    public Queue addColumnsToList(int[][] arr) {
+        Queue<Integer> IList = new LinkedList<>();
 
-    public int top() {
-        if (isEmpty()) {
-            System.out.println("Empty, top is null");
-            return -1;
-        }
-        return top.value;
-    }
-
-    public int getMin() {
-        if (isEmpty()) {
-            System.out.println("Empty, min is null");
-            return -1;
-        }
-
-        Node minCheck = top;
-        int minValue = Integer.MAX_VALUE;
-
-        while (minCheck != null) {
-            if (minValue > minCheck.value) {
-                minValue = minCheck.value;
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[0].length; j++) {
+                IList.add(arr[i][j]);
             }
-            minCheck = minCheck.next;
         }
-        return minValue;
+
+        return IList;
     }
 
-    public boolean isEmpty() {
-        return top == null;
+    class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
     }
-}
 
-class Node {
-    int value;
-    Node next;
-}
+    class MinStack {
+        Node top;
+        Node min;
 
+        /**
+         * initialize your data structure here.
+         */
+        public MinStack() {
+            top = null;
+            min = null;
+            ;
+        }
+
+        public void push(int x) {
+            Node prevTop = top;
+            Node newNode = new Node();
+            newNode.value = x;
+            newNode.next = prevTop;
+            top = newNode;
+
+            //first time called
+            boolean flag = true;
+            if (flag) {
+                min = newNode;
+                flag = false;
+            } else if (newNode.value < min.value) {
+                min = newNode;
+            }
+
+        }
+
+        public void pop() {
+            if (isEmpty()) {
+                System.out.println("empty stack");
+            }
+            Node popped = top;
+            top = top.next;
+            System.out.println("popped: " + popped.value);
+            //return popped.value;
+        }
+
+        public int top() {
+            if (isEmpty()) {
+                System.out.println("Empty, top is null");
+                return -1;
+            }
+            return top.value;
+        }
+
+        public int getMin() {
+            if (isEmpty()) {
+                System.out.println("Empty, min is null");
+                return -1;
+            }
+
+            Node minCheck = top;
+            int minValue = Integer.MAX_VALUE;
+
+            while (minCheck != null) {
+                if (minValue > minCheck.value) {
+                    minValue = minCheck.value;
+                }
+                minCheck = minCheck.next;
+            }
+            return minValue;
+        }
+
+        public boolean isEmpty() {
+            return top == null;
+        }
+    }
+
+    class Node {
+        int value;
+        Node next;
+    }
+
+}
