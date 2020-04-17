@@ -215,6 +215,25 @@ class LeetCode {
         return count;
     }
 
+    public int numJewelsInStones(String J, String S) {
+        char[] chars = J.toCharArray();
+        HashSet<Character> set = new HashSet<>();
+        int count = 0;
+
+        for(char c : chars){
+            set.add(c);
+        }
+
+        for (int i = 0; i < S.length() ; i++) {
+            char current = S.charAt(i);
+            if(set.contains(current)){
+                count++;
+            }
+        }
+
+        return count;
+    }
+
     public boolean checkValidString(String s) {
         //Stack<Character> stack = new Stack<>();
         char[] chars = s.toCharArray();
@@ -244,6 +263,25 @@ class LeetCode {
         System.out.println("Opens: " + openParenCount);
         System.out.println("Closed: " + closeParenCount);
         return openParenCount == closeParenCount;
+    }
+
+    public int[] productExceptSelf(int[] nums) {
+        int[] ans = new int[nums.length];
+        int totalProduct = 1;
+
+        for (int i = 0; i < nums.length; i++) {
+            totalProduct *= nums[i];
+        }
+
+        System.out.println("Total product: " + totalProduct);
+
+        if (totalProduct == 0) {
+            return nums;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            ans[i] = totalProduct / nums[i];
+        }
+        return ans;
     }
 
     public static void main(String[] args) {
@@ -299,24 +337,6 @@ class LeetCode {
         return leftrotate(str, str.length() - d);
     }
 
-    public int[] productExceptSelf(int[] nums) {
-        int[] ans = new int[nums.length];
-        int totalProduct = 1;
-
-        for (int i = 0; i < nums.length; i++) {
-            totalProduct *= nums[i];
-        }
-
-        System.out.println("Total product: " + totalProduct);
-
-        if (totalProduct == 0) {
-            return nums;
-        }
-        for (int i = 0; i < nums.length; i++) {
-            ans[i] = totalProduct / nums[i];
-        }
-        return ans;
-    }
 
 
     public Queue addColumnsToList(int[][] arr) {
@@ -413,7 +433,6 @@ class LeetCode {
                 return top == null;
             }
         }
-
 
         class Node {
         int value;
