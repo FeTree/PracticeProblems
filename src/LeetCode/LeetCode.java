@@ -284,12 +284,34 @@ class LeetCode {
         return ans;
     }
 
+    public int[] smallerNumbersThanCurrent(int[] nums) {
+        int[] ansArr = new int[nums.length];
+        int count = 0;
+
+        for (int i = 0; i < nums.length ; i++) {
+            int current = nums[i];
+            for (int j = i + 1; j <nums.length ; j++) {
+                if(nums[j] < current) {
+                    count++;
+                    System.out.println("J: " + nums[j]);
+                }
+                //ansArr[i] = count;
+            }
+            ansArr[i] = count;
+            count = 0;
+        }
+        return ansArr;
+    }
+
     public static void main(String[] args) {
         LeetCode lc = new LeetCode();
 
-        int[] nums = {2, 2};
-        String s = "(*))";
-        System.out.println(lc.checkValidString(s));
+        int[] nums = {8,1,2,2,3};
+        int[] test = lc.smallerNumbersThanCurrent(nums);
+
+        for(int i : test){
+            System.out.print(i + " ");
+        }
     }
 
     public String stringShift(String s, int[][] shift) {
