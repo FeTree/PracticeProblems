@@ -378,7 +378,9 @@ class FirstUnique {
     public FirstUnique(int[] nums) {
         queue = new LinkedList();
         for(int i : nums) {
-            queue.add(i);
+            if(!queue.contains(i)) {
+                queue.add(i);
+            }
         }
     }
 
@@ -386,15 +388,9 @@ class FirstUnique {
         if(queue.isEmpty()){
             return -1;
         }
-        int current = 0;
-        int ans = 0;
-        while(!queue.isEmpty()) {
-            current = queue.poll();
-            if (!queue.contains(current)) {
-                ans = current;
-            }
+        else{
+            return queue.poll();
         }
-        return ans;
     }
 
     public void add(int value) {
